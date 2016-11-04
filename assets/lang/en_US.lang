@@ -1,0 +1,83 @@
+#Settings
+#All settings values MUST be included in all localization, otherwise the game will crash
+useUnicodeFont=false
+
+#If a value below this point is not present in a localization, the entry from this file will be used instead
+#GUI
+game.name=Aggression Sequence
+
+menu.true=True
+menu.false=False
+menu.back=< Back
+menu.apply=Apply
+menu.defaults=Defaults
+
+menu.main.start=Start
+menu.main.character=Character
+menu.main.options=Settings
+menu.main.exit=Exit
+
+menu.start.name=Start
+menu.start.stage=Stage
+menu.start.launch=Launch
+menu.start.tutorial=Tutorial
+menu.start.reset=Reset
+menu.start.story=Story
+menu.start.survival=Survival
+menu.start.gauntlet=Gauntlet
+menu.start.sandbox=Sandbox
+
+menu.character.name=Character
+menu.character.ship=Ship
+menu.character.weapon=Weapon
+menu.character.utility=Utility
+menu.character.super=Super
+menu.character.upgrade=Upgrade
+
+menu.options.name=Settings
+menu.options.resolution=Resolution
+menu.options.fullscreen=Fullscreen
+menu.options.musicVol=Music Volume
+menu.options.soundVol=Sound Volume
+menu.options.customCursor=Custom Cursor
+menu.options.cursorStyle=Cursor Style
+menu.options.cursorSize=Cursor Size
+menu.options.hudScale=HUD Scale
+menu.options.enemyHPBars=Enemy Health Bars
+menu.options.dmgPopoff=Damage Indicators
+menu.options.showFPS=Show FPS
+menu.options.controls=Controls >
+
+#Max entry limit = 3
+menu.fullscreenNotify.dialog={Switching to and from | fullscreen requires you to | restart Aggression Sequence}
+
+menu.controls.name=Settings - Controls
+menu.controls.moveUp=Move Up
+menu.controls.moveLeft=Move Left
+menu.controls.moveDown=Move Down
+menu.controls.moveRight=Move Right
+menu.controls.useWeapon=Use Weapon
+menu.controls.useUtility=Use Utility
+menu.controls.useSuper=Use Super
+
+#Item
+item.prospect.name=Prospect
+
+item.plasmaCannon.name=Plasma Cannon
+
+item.phaseEngine.name=Phase Engine
+
+item.hep.name=High-Energy Prism
+
+#Stage
+
+
+#Enemy
+enemy.fighter.name=Fighter
+enemy.fighterElite.name=Elite Fighter
+
+#Characters
+char.god=vTcwraAq4Ck4duuxsowbT5I43khCgr41onx39pk48dljz2a9kfHgn8pygEwaR088uqpigp
+char.evanna=Evanna
+
+#

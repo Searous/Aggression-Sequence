@@ -214,8 +214,8 @@ public class Game extends Canvas implements Runnable {
 	    handler.menus.get("optionsControls").options[6].selectedStarting = (int)handler.save.get("control_useSuper");
 
 	    setStages();
-	    Audio.load();
-	    Audio.setMusic("temp");
+	    //Audio.load();
+	    //Audio.setMusic("temp");
 	    //--------------------Menu---------------------------------------------------------------------------------------------------------------------------
 	   
 	    //Spawns the player's ship.  Will be moved when stages are implemented.
@@ -1407,7 +1407,7 @@ public class Game extends Canvas implements Runnable {
 			render();
 			frames++;
 			
-			if (window.frame.isFocused() && (int)handler.save.get("lockMouse") == 1) {
+			if (window.frame.isFocused() && (int)handler.save.get("lockMouse") == 1 || window.frame.isFocused() && fullscreen) {
 				if (MouseInfo.getPointerInfo().getLocation().x < this.getLocationOnScreen().x) {
 					robot.mouseMove(this.getLocationOnScreen().x, MouseInfo.getPointerInfo().getLocation().y);
 				} else if (MouseInfo.getPointerInfo().getLocation().x > this.getLocationOnScreen().x + WIDTH - 1) {
