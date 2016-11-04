@@ -447,6 +447,8 @@ public class Handler {
 	        		"cursorSize=0",
 	        		"showfps=0",
 	        		"damageNumbers=0",
+	        		"localization=en_US",
+	        		"lockMouse=0",
 	        		"",
 	        		
 	        		//Controls
