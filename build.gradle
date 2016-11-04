@@ -1,0 +1,16 @@
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'eclipse'
+
+mainClassName = "com.game.main.Game"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    // https://mvnrepository.com/artifact/org.slick2d/slick2d-core
+    compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.2'
+}
+
+
