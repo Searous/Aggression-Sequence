@@ -5,10 +5,8 @@ import java.util.logging.Logger;
 
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
-import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.util.Log;
 
@@ -18,12 +16,14 @@ public class AggressionSequence extends BasicGame {
 		super(title);
 	}
 	
-	public Image test;
+	public GraphicsHandler gh;
+	public SoundHandler sh;
+	
 	
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		test = new Image(Util.getResourceStream("mob/player.png"), "player", false);
-		Log.info("Registered sprite");
+		this.gh = new GraphicsHandler();
+		this.sh = new SoundHandler();
 	}
 
 	@Override
@@ -33,8 +33,7 @@ public class AggressionSequence extends BasicGame {
 	
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		g.drawString("Hello world", 50, 50);
-		test.draw(10, 10, 2.0f, new Color(255,0,0));
+		
 		
 	}
 	
@@ -45,6 +44,7 @@ public class AggressionSequence extends BasicGame {
 			appgc = new AppGameContainer(new AggressionSequence("Aggression Sequence"));
 			appgc.setShowFPS(false);
 			appgc.setDisplayMode(640, 480, false);
+			appgc.setMinimumLogicUpdateInterval(50);
 			appgc.start();
 		}
 		catch (SlickException ex)
