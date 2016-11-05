@@ -7,13 +7,13 @@ apply plugin: 'application'
 apply plugin: 'eclipse'
 apply plugin: 'idea'
 
-mainClassName = "com.game.main.Game"
-applicationDefaultJvmArgs = ["-Djava.library.path=natives" + File.pathSeparator + "../natives"]
-
 // This thing is amazing for basic file operations
 def ant = new groovy.util.AntBuilder()
 // Yes, this does say "natives" twice. This is intentional.
 def NATIVES_DIR = "build/natives/natives"
+
+mainClassName = "com.game.main.Game"
+applicationDefaultJvmArgs = ["-Djava.library.path=" + NATIVES_DIR + File.pathSeparator + "../natives"]
 
 repositories {
     mavenCentral()
@@ -34,19 +34,13 @@ distributions {
     }
 }
 
-task cleanOldNatives << {
-    ant.delete() {
-        fileset(dir:"build/libs") {
-            include(name:"**/*.so")
-            include(name:"**/*.dll")
-            include(name:"**/*.jnilib")
-            include(name:"**/*.dylib")
-        }
+def symbolicLink(target, link) {
+    if (OS == 'win32') {
+        exec { commandLine }
     }
-    ant.delete(dir:"build/libs/META-INF")
 }
 
-task unpackNatives(dependsOn: cleanOldNatives) << {
+task unpackNatives() << {
     configurations.compile.each { file ->
         if (file.name.matches(".*natives.*")) {
             logger.debug("Unpacking " + file.name + " into " + NATIVES_DIR)
@@ -55,11 +49,6 @@ task unpackNatives(dependsOn: cleanOldNatives) << {
         }
     }
     ant.delete(dir:NATIVES_DIR + "/META-INF")
-    // Create a symbolic link to link the "natives" dir in the run directory
-    // with the natives dir where all the natives actually are
-    if (!(new File("natives").exists())) {
-        Files.createSymbolicLink(Paths.get('natives'), Paths.get(NATIVES_DIR))
-    }
 }
 
 // Now that we have our tasks, make sure it gets run at compile time
