@@ -9,6 +9,7 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -70,6 +71,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	public static Window window; 
 	public static Random r;
+
+	private static final String LIBRARY_PATH_KEY = "java.library.path";
 	
 	
 	/**
@@ -214,8 +217,8 @@ public class Game extends Canvas implements Runnable {
 	    handler.menus.get("optionsControls").options[6].selectedStarting = (int)handler.save.get("control_useSuper");
 
 	    setStages();
-	    //Audio.load();
-	    //Audio.setMusic("temp");
+	    Audio.load();
+	    Audio.setMusic("temp");
 	    //--------------------Menu---------------------------------------------------------------------------------------------------------------------------
 	   
 	    //Spawns the player's ship.  Will be moved when stages are implemented.
@@ -1337,6 +1340,8 @@ public class Game extends Canvas implements Runnable {
 	 */
 	@SuppressWarnings("unused")
 	public static void main(String[] arg) {
+		// Make sure Slick can find the native libraries
+		// System.setProperty("org.lwjgl.librarypath", new File("natives").getAbsolutePath());
 		new Game();
 		
 		Scanner scanner = new Scanner(System.in);

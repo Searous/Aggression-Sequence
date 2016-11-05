@@ -1,30 +1,23 @@
 package com.game.main;
 
-import java.awt.Font;
-import java.awt.FontFormatException;
-import java.awt.GraphicsEnvironment;
-import java.io.File;
 import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.security.InvalidKeyException;
 import java.util.HashMap;
 
-import javax.swing.text.StyledEditorKit.FontSizeAction;
-
 public class Localization {
 	private static HashMap lang = new HashMap();
-	private static HashMap defaultLang = new HashMap();
-	private static Path file;
+	private static HashMap defaultLang = null;
 	
 	public static boolean useUnicodeFont = false;
 	
-	public static void setLocalization(Path path) {
-		file = path;
+	public static void setLocalization(String locale) throws IOException {
+		// Just call it whenever language changes. Who cares.
+		loadDefaultLang();
 		lang.clear();
-		loadLang();
+		lang = loadLang(locale);
 		useUnicodeFont = (boolean)lang.get("useUnicodeFont");
 	}
+
 	public static String get(String unlocalizedString) {
 		try {
 			if (lang.get(unlocalizedString) != null) {
@@ -36,12 +29,13 @@ public class Localization {
 		}
 	}
 	
-	private static void loadLang() {
-		try {
-			lang = (HashMap<String, Object>)Util.getConfigurationFile(file);
-			defaultLang = (HashMap<String, Object>)Util.getConfigurationFile(Paths.get("assets/lang/en_US.lang"));
-		} catch(Exception e) {
-			e.printStackTrace();
+	private static HashMap<String, Object> loadLang(String locale) throws IOException {
+		return Util.getConfiguration(Util.getResourceStream("lang/" + locale + ".lang"));
+	}
+
+	private static void loadDefaultLang() throws IOException {
+		if (defaultLang == null) {
+			defaultLang = loadLang("en_US");
 		}
 	}
 }

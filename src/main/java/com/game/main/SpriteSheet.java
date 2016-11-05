@@ -1,7 +1,6 @@
 package com.game.main;
 
 import java.awt.Image;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -16,7 +15,7 @@ public class SpriteSheet {
 		Image img = null;
 		boolean ok;
 		try {
-			img = ImageIO.read(new File("assets/" + path + ".png"));
+			img = ImageIO.read(Util.getResourceStream(path + ".png"));
 			sheet.put(name, img);
 			
 			ok = true;

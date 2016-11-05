@@ -1,8 +1,19 @@
+import java.nio.file.Files
+import java.nio.file.Path
+import java.nio.file.Paths
+
 apply plugin: 'java'
 apply plugin: 'application'
 apply plugin: 'eclipse'
+apply plugin: 'idea'
 
 mainClassName = "com.game.main.Game"
+applicationDefaultJvmArgs = ["-Djava.library.path=natives" + File.pathSeparator + "../natives"]
+
+// This thing is amazing for basic file operations
+def ant = new groovy.util.AntBuilder()
+// Yes, this does say "natives" twice. This is intentional.
+def NATIVES_DIR = "build/natives/natives"
 
 repositories {
     mavenCentral()
@@ -12,5 +23,49 @@ dependencies {
     // https://mvnrepository.com/artifact/org.slick2d/slick2d-core
     compile group: 'org.slick2d', name: 'slick2d-core', version: '1.0.2'
 }
+
+// When running dist copy files from natives, but copy them into a folder called
+// natives. This is why NATIVES_DIR has natives twice.
+distributions {
+    main {
+        contents {
+            from { NATIVES_DIR + "/.." }
+        }
+    }
+}
+
+task cleanOldNatives << {
+    ant.delete() {
+        fileset(dir:"build/libs") {
+            include(name:"**/*.so")
+            include(name:"**/*.dll")
+            include(name:"**/*.jnilib")
+            include(name:"**/*.dylib")
+        }
+    }
+    ant.delete(dir:"build/libs/META-INF")
+}
+
+task unpackNatives(dependsOn: cleanOldNatives) << {
+    configurations.compile.each { file ->
+        if (file.name.matches(".*natives.*")) {
+            logger.debug("Unpacking " + file.name + " into " + NATIVES_DIR)
+            // This destination is to work with the plugin conventions
+            ant.unzip(src:file, dest:NATIVES_DIR, overwrite:"true")
+        }
+    }
+    ant.delete(dir:NATIVES_DIR + "/META-INF")
+    // Create a symbolic link to link the "natives" dir in the run directory
+    // with the natives dir where all the natives actually are
+    if (!(new File("natives").exists())) {
+        Files.createSymbolicLink(Paths.get('natives'), Paths.get(NATIVES_DIR))
+    }
+}
+
+// Now that we have our tasks, make sure it gets run at compile time
+compileJava {
+    dependsOn unpackNatives
+}
+
 
 
