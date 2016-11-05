@@ -106,10 +106,10 @@ public class Handler {
 		
 		//saveSave();
 		//writeSave();
-		loadSave();
-		Localization.setLocalization(Paths.get("assets/lang/"+save.get("localization")+".lang"));
 		//Create backup save after successful load
     	try {
+			loadSave();
+			Localization.setLocalization((String)save.get("localization"));
 	    	if (!error) { 
 	    		Files.copy(Paths.get("save.cfg"), Paths.get("save.bak"), StandardCopyOption.REPLACE_EXISTING); 
 	    		Log.write("Save backup created", "Info");

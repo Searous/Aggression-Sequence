@@ -1,5 +1,6 @@
 package com.game.main;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -16,7 +17,7 @@ public class Audio {
 	
 	public static void load() {
 		try {
-			music.put("temp", new Music("assets/sound/music/temp.ogg"));
+			music.put("temp", new Music(Util.getResourceURL("sound/music/temp.ogg")));
 		} catch (SlickException e) {
 			e.printStackTrace();
 		}

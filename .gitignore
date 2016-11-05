@@ -2,6 +2,9 @@
 save.cfg
 save.bak
 
+# Don't want to commit the symlink either.
+natives/
+
 ### Java template
 *.class
 

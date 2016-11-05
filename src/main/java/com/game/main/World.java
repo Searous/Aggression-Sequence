@@ -31,7 +31,7 @@ public class World {
 		this.handler = handler;
 		
 		try {
-			font = Font.createFont(Font.TRUETYPE_FONT, new File("assets/ag_font.ttf"));
+			font = Font.createFont(Font.TRUETYPE_FONT, Util.getResourceStream("ag_font.ttf"));
 		} catch (FontFormatException | IOException e) {
 			e.printStackTrace();
 		}
