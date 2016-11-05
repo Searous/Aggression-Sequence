@@ -12,7 +12,7 @@ def ant = new groovy.util.AntBuilder()
 // Yes, this does say "natives" twice. This is intentional.
 def NATIVES_DIR = "build/natives/natives"
 
-mainClassName = "com.game.main.Game"
+mainClassName = "ag.main.AggressionSequence"
 applicationDefaultJvmArgs = ["-Djava.library.path=" + NATIVES_DIR + File.pathSeparator + "../natives"]
 
 repositories {
